@@ -1,0 +1,109 @@
+{
+  "name": "gulp-transform-cache",
+  "version": "0.0.2",
+  "discription": "gulp-transform-cache",
+  "scripts": {
+    "preversion": "npm run cover",
+    "lint": "tslint src/**/*.ts --project tsconfig.json --config tslint.json",
+    "doc": "gulp doc",
+    "conf": "tsc && node_modules/ts-node/dist/bin.js src/configuration/generate.ts",
+    "test": "jest --no-cache",
+    "test0": "node_modules/mocha/bin/_mocha --require ts-node/register --require source-map-support/register -t 3000 --recursive",
+    "cover": "jest --no-cache --coverage",
+    "coveralls": "jest --no-cache --coverage && cat ./coverage/lcov.info | coveralls",
+    "build": "gulp",
+    "watch": "gulp watch & npm start",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/searchfe/gulp-transform-cache"
+  },
+  "homepage": "https://github.com/searchfe/gulp-transform-cache",
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/npm": "^5.1.7",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "@types/chai": "^4.1.4",
+    "@types/ftp": "^0.3.29",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^10.14.1",
+    "@types/underscore": "^1.8.9",
+    "chai": "^4.1.2",
+    "commitizen": "^3.1.1",
+    "coveralls": "^3.0.2",
+    "cz-conventional-changelog": "^2.1.0",
+    "del": "^3.0.0",
+    "etpl": "^3.2.0",
+    "findup-sync": "^2.0.0",
+    "gulp": "^4.0.1",
+    "gulp-base64-inline": "^1.0.4",
+    "gulp-inline-template": "^1.1.5",
+    "gulp-replace": "^1.0.0",
+    "gulp-typedoc": "^2.2.1",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "gulp-util": "^3.0.8",
+    "http-server": "^0.11.1",
+    "istanbul": "^0.4.5",
+    "jest": "^24.7.1",
+    "jsdoc-to-markdown": "^4.0.1",
+    "nyc": "^13.0.1",
+    "semantic-release": "^15.13.12",
+    "source-map-support": "^0.5.9",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typedoc": "^0.12.0",
+    "typedoc-plugin-markdown": "^1.1.15",
+    "typescript": "^3.1.6"
+  },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ]
+  },
+  "dependencies": {
+    "readable-stream": "^3.3.0"
+  },
+  "engines": {
+    "node": ">= 6.0.x"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "",
+  "files": [
+    "dist",
+    "*.json",
+    "*.md"
+  ],
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
+  }
+}
