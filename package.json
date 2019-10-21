@@ -1,6 +1,6 @@
 {
   "name": "gulp-transform-cache",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "discription": "gulp-transform-cache",
   "scripts": {
     "preversion": "npm run cover",
