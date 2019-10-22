@@ -16,8 +16,9 @@ const depB = r(__dirname, 'assert/depB.js');
 // const prefix = 'molecule';
 
 describe('With Cache With change', () => {
-    // 使用cache，这个管道不产生变化，但依赖变化了（file.contents改变）
-    // 测试1：产生cache，测试2：复用cache，测试3：因为mtime失效，不复用且生成新cache
+
+  // 使用cache，这个管道不产生变化，但依赖变化了（file.contents改变）
+  // 测试1：产生cache，测试2：复用cache，测试3：因为mtime失效，不复用且生成新cache
 
   beforeAll(() => {
     removeSync(r(root, '../src/.cache/DepCache'));
