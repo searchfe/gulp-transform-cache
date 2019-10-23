@@ -4,6 +4,7 @@ import { removeSync } from 'fs-extra';
 import { resolve as r } from 'path';
 import { File } from '../src/types';
 import { Cache } from '../src/cache';
+import { updateAll } from '../src/dependency';
 import { Transform } from '../src/transform';
 import { Transform as Pipe } from "readable-stream";
 
@@ -11,9 +12,10 @@ const root = __dirname;
 const fileName = 'origin.withcache.js';
 const cacheDir = r(__dirname, '../src/.cache');
 const newBuffer = new Buffer('var test = "911";');
+
 // const content = readFileSync(filePath);
 // const prefix = 'molecule';
-
+updateAll();
 describe('With Cache With change', () => {
     // 使用cache，这个管道产生变化（file.contents改变）
     // 测试1：产生cache，测试2：复用cache，测试3：因为mtime失效，不复用且生成新cache

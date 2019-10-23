@@ -29,6 +29,20 @@ const pipe = new Pipe({
 
 ```
 
+## Develop
+
+写入以下内容到配置文件（dev.config.js）：
+
+```javascript
+module.exports = {
+    packages: [
+      // '/Users/xxx/www-wise/amd_modules',
+      '/Users/xxx/www-wise/node_modules'
+    ]
+};
+```
+
+执行 ```npm run watch:dev``` 即可进入watch+deploy模式
 
 ## API
 

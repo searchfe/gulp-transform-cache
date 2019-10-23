@@ -2,13 +2,14 @@ import { resolve } from 'path';
 import { File } from './types';
 import { existsSync, writeFileSync, readFileSync, statSync } from 'fs';
 import { removeSync, mkdirpSync } from 'fs-extra';
-import { getName }  from './hash';
+import { update } from './dependency';
+import { getName, getNameByInfo}  from './hash';
 
 export class Cache {
   public dir: string;
   public setKey(key: string) {
     // 工作路径
-    this.dir = resolve(__dirname, '.cache', key || 'temp');
+    this.dir = resolve(__dirname, '.cache', key);
     mkdirpSync(this.dir);
   }
 
@@ -50,18 +51,22 @@ export class Cache {
       const arr = line.split('\t');
       if (diff === false && arr.length === 2) {
         if (existsSync(arr[0]) && statSync(arr[0]).mtimeMs.toString() === arr[1]) {
-          // 不用做循环依赖分析了
+
         } else {
           diff = true;
         }
       }
     });
+    if (diff) {
+      console.log('DDDDDDIF+++++++', diff, cacheDir);
+      console.log('DDDDDDIF-------', diff, readFileSync(cacheDir + '.info').toString());
+    }
     return !diff;
   }
 
   passCache(file: File, oldPath: string) {
     if (file && file.stat && file.stat.mtimeMs) {
-      const cacheDir =  this.dir + '/' + getName(file, oldPath);
+      const cacheDir = this.dir + '/' + getName(file, oldPath);
       writeFileSync(cacheDir + '.pass', '');
       writeFileSync(cacheDir + '.info', `${oldPath}\n${file.stat.mtimeMs}\n${file.path}\n`);
       if (oldPath !== file.path) {
@@ -70,26 +75,23 @@ export class Cache {
     }
   }
   saveCache(file: File, oldPath: string) {
-    if (file.depFiles && file.depFiles.length) {
-    }
     if (file && file.stat && file.stat.mtimeMs) {
-      const cacheDir =  this.dir + '/' + getName(file, oldPath);
+      const cacheDir = this.dir + '/' + getName(file, oldPath);
       if (file.depFiles && file.depFiles.length) {
         let error = false;
         let depinfo = '';
         file.depFiles.forEach(dep => {
           if (existsSync(dep)) {
-            const stat = statSync(dep);
-            depinfo += dep + "\t" + stat.mtimeMs + '\n';
+            depinfo += dep + "\t" + statSync(dep).mtimeMs + '\n';
           } else {
-            console.warn(`WATIN: ${dep} does not exist!`);
             error = true;
+            console.warn(`WATIN: ${dep} does not exist!`);
+            return;
           }
         });
         if (error) {
           return;
         }
-        // console.log("write deps》》》》》》》》", depinfo);
         writeFileSync(cacheDir + '.deps', depinfo);
       }
       writeFileSync(cacheDir + '.cache', file.contents);
@@ -124,10 +126,10 @@ export class Cache {
             // if (nfile.path === oldPath) {
               if (oldBuffer === nfile.contents && !nfile.depFiles) {
                 // 没有变化 标记无处理
-                // console.log('save pass');
+                console.log('save pass');
                 this.passCache(nfile, oldPath);
               } else {
-                // console.log('save cache', oldPath, nfile.depFiles);
+                console.log('save cache');
                 this.saveCache(nfile, oldPath);
               }
               callback(null, nfile);
