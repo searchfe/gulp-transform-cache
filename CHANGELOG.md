@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/searchfe/gulp-transform-cache/compare/v1.0.0...v1.1.0) (2019-10-23)
+
+
+### Features
+
+* upgrade dep & clean cache files ([6ba60cd](https://github.com/searchfe/gulp-transform-cache/commit/6ba60cd6e4bcdad204d7d2b53c910978c97b2225))
+* upgrade dep & clean cache files ([c05fb0f](https://github.com/searchfe/gulp-transform-cache/commit/c05fb0fa10fa628a2d83d6464bed8a018b53e3a7))
+
 # 1.0.0 (2019-10-22)
 
 
