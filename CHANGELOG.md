@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/searchfe/gulp-transform-cache/compare/v1.1.0...v1.1.1) (2019-11-01)
+
+
+### Bug Fixes
+
+* change mtime ([a6298b3](https://github.com/searchfe/gulp-transform-cache/commit/a6298b3788591e566da4620a1331521d41f929d4))
+* delete copy ([262b7d0](https://github.com/searchfe/gulp-transform-cache/commit/262b7d026d7b0c3363ba8333303a85686051595e))
+
 # [1.1.0](https://github.com/searchfe/gulp-transform-cache/compare/v1.0.0...v1.1.0) (2019-10-23)
 
 
