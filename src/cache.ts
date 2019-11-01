@@ -129,6 +129,8 @@ export class Cache {
               } else {
                 // console.log('save cache', oldPath, nfile.depFiles);
                 this.saveCache(nfile, oldPath);
+                nfile.stat.mtimeMs = new Date().getTime();
+                nfile.stat.mtime = new Date();
               }
               callback(null, nfile);
             // } else {
